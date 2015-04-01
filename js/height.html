@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>文档高度不够一屏，footer显示撑满一屏</title>
+	<style>
+	*{margin: 0px; padding: 0px; }
+	.header{width: 100%; height: 100px; text-align:center; border-bottom:1px solid #eee; line-height:100px;}
+	h1{font: 36px; font-weight:bold; font-family:"微软雅黑"; color:#333;}
+	.contenter{max-width: 960px; width:90%; margin: 60px auto;}
+	p{font-size:12px; font-family:"宋体"; line-height:26px; margin-bottom:20px; color:#666;}
+	.footer{ width:100%; text-align:center; font-size:12px; color:#999;background-color:#eee; height: 100px; line-height:100px;}
+	.fixed{position:fixed; left: 0; bottom: 0;}
+	ul{font-size:12px; color:#999;}
+	span{color:green;}
+	</style>
+</head>
+<body>
+	<div class="header">
+		<h1>文档高度不够一屏，footer显示撑满一屏</h1>
+	</div>
+	<div class="contenter">
+		<p>当网页文档可视部分$(document.body).height()不超过可是窗口高度$(window).height()</p>
+		<p>footer部分直接fixed定位到底部</p>
+		<p>
+			<ul>
+				<li id="g1">$(window).height(); //浏览器时下窗口可视区域高度<span></span></li>
+				<li id="g2">$(document).height(); //浏览器时下窗口文档的高度<span></span></li>
+				<li id="g3">$(document.body).height();//浏览器时下窗口文档body的高度<span></span></li>
+				<li id="g4">$(document.body).outerHeight(true);//浏览器时下窗口文档body的总高度包括border padding margin <span></span></li>
+				<li id="g5">$(".contenter").height() //类为.footer的div的高度<span></span></li>
+			</ul>
+		<p>
+	</div>
+
+	<div class="footer">
+		&copy;dongsongshan
+	</div>
+
+
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script>
+$(function(){
+	var a=$(window).height();
+	var b=$(document).height();
+	var c=$(document.body).outerHeight(true);
+	$("#g1 span").html(a);
+    $("#g2 span").html(b);
+    $("#g3 span").html(c);
+    $("#g4 span").html($(document.body).outerHeight(true));
+    $("#g5 span").html($(".footer").height());
+// alert($(window).height()); //浏览器时下窗口可视区域高度  
+// alert($(document).height()); //浏览器时下窗口文档的高度  
+// alert($(document.body).height());//浏览器时下窗口文档body的高度  
+// alert($(document.body).outerHeight(true));//浏览器时下窗口文档body的总高度包括border padding margin  
+// alert($(window).width()); //浏览器时下窗口可视区域宽度  
+// alert($(document).width());//浏览器时下窗口文档对于象宽度  
+// alert($(document.body).width());//浏览器时下窗口文档body的高度  
+// alert($(document.body).outerWidth(true));//浏览器时下窗口文档body的总宽度包括border padding margin  
+  if(a-c>0){
+  		$(".footer").addClass("fixed")
+  };
+}) 
+
+</script>
+</body>
+</html>
